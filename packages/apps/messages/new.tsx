@@ -43,13 +43,13 @@ export function NewMessage({ back }: { back: () => void }) {
         <button type="button" aria-label="Back" {...stylex.props(shared.bk, styles.bkAbs)} onClick={back}>
           <Sym name="back" size={20} />
         </button>
-        <span {...stylex.props(styles.hdrWho)}>New Message</span>
+        <span {...stylex.props(styles.hdrWho)}>新信息</span>
       </Title>
       <div {...stylex.props(styles.toRow)}>
-        <span {...stylex.props(styles.toLabel)}>To:</span>
+        <span {...stylex.props(styles.toLabel)}>收件人:</span>
         <TextField
           ref={field}
-          placeholder="Name or number"
+          placeholder="姓名或号码"
           aria-label="To"
           value={to}
           onChange={(e) => setComposeTo(e.target.value)}
@@ -95,7 +95,7 @@ export function NewMessage({ back }: { back: () => void }) {
                 </span>
                 <span {...stylex.props(styles.tx)}>
                   <b {...stylex.props(styles.txB)}>{formatNumber(to) || to.trim()}</b>
-                  <p {...stylex.props(styles.txP)}>Not in your contacts - sends locally, no reply</p>
+                  <p {...stylex.props(styles.txP)}>不在通讯录中 - 仅本地发送，不会收到回复</p>
                 </span>
               </button>
             </li>

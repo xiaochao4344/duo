@@ -44,7 +44,7 @@ export function Inbox() {
   return (
     <>
       <Title>
-        Messages
+        信息
         <Title as="span" variant="accessory" xstyle={[styles.hdrActs]}>
           {!!convs.length && (
             <button
@@ -53,7 +53,7 @@ export function Inbox() {
               onClick={() => setEditing(!editing)}
               aria-pressed={editing}
             >
-              {editing ? 'Done' : 'Edit'}
+              {editing ? '完成' : '编辑'}
             </button>
           )}
           <IconButton name="compose" size={19} aria-label="New Message" onClick={() => select('new')} />
@@ -62,7 +62,7 @@ export function Inbox() {
       <Screen>
         <SearchBar q={q} onQuery={setQ} />
         {!convs.some(visible) ? (
-          <Placeholder>No Messages Yet</Placeholder>
+          <Placeholder>暂无信息</Placeholder>
         ) : !shown.length ? (
           <Placeholder>{`No Results for “${q}”`}</Placeholder>
         ) : (
@@ -89,7 +89,7 @@ function SearchBar({ q, onQuery }: { q: string; onQuery: (v: string) => void }) 
         <Sym name="search" size={14} />
       </span>
       <TextField
-        placeholder="Search"
+        placeholder="搜索"
         aria-label="Search"
         value={q}
         onChange={(e) => onQuery(e.target.value)}
@@ -115,12 +115,12 @@ function ConvRow({ conv, editing }: { conv: Conversation; editing: boolean }) {
   const name = convName(conv)
   const items: MenuEntry[] = [
     {
-      label: conv.unread ? 'Mark as Read' : 'Mark as Unread',
+      label: conv.unread ? '标记为已读' : '标记为未读',
       icon: conv.unread ? 'eye' : 'eyeSlash',
       onSelect: () => setUnread(conv.id, !conv.unread)
     },
     'separator',
-    { label: 'Delete', icon: 'trash', onSelect: () => removeConv(conv.id) }
+    { label: '删除', icon: 'trash', onSelect: () => removeConv(conv.id) }
   ]
   return (
     <li {...stylex.props(styles.rowWrap)}>
@@ -152,7 +152,7 @@ function ConvRow({ conv, editing }: { conv: Conversation; editing: boolean }) {
           <p {...stylex.props(styles.txP)}>
             {conv.draft.trim() ? (
               <>
-                <span {...stylex.props(styles.draftTag)}>Draft:</span> {preview(conv, Date.now())}
+                <span {...stylex.props(styles.draftTag)}>草稿:</span> {preview(conv, Date.now())}
               </>
             ) : (
               preview(conv, Date.now())

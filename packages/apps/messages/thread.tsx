@@ -89,7 +89,7 @@ function Live({ os, conv, back }: { os: Os; conv: Conversation; back: () => void
     area.current?.focus()
   }
 
-  const items: MenuEntry[] = [{ label: 'Delete Conversation', icon: 'trash', onSelect: () => removeConv(conv.id) }]
+  const items: MenuEntry[] = [{ label: '删除对话', icon: 'trash', onSelect: () => removeConv(conv.id) }]
 
   return (
     <>
@@ -154,7 +154,7 @@ function Live({ os, conv, back }: { os: Os; conv: Conversation; back: () => void
                     onClose={() => setBubMenu('')}
                     items={[
                       {
-                        label: 'Copy',
+                        label: '拷贝',
                         icon: 'document',
                         onSelect: () => void navigator.clipboard?.writeText(m.text).catch(() => {})
                       }
@@ -165,7 +165,7 @@ function Live({ os, conv, back }: { os: Os; conv: Conversation; back: () => void
                 </div>
                 {i === conv.messages.length - 1 && m.me && (
                   <Text as="div" size="caption2" color="secondary" xstyle={[styles.status]}>
-                    Sent
+                    已发送
                   </Text>
                 )}
               </div>
@@ -173,7 +173,7 @@ function Live({ os, conv, back }: { os: Os; conv: Conversation; back: () => void
           })}
           {typing && (
             <div {...stylex.props(styles.burst)}>
-              <div {...stylex.props(styles.typing)} role="status" aria-label={`${name} is typing`}>
+              <div {...stylex.props(styles.typing)} role="status" aria-label={`${name} 正在输入`}>
                 {DOTS.map((d) => (
                   <i key={d} {...stylex.props(styles.dot, delay.ms(d * 150))} />
                 ))}
@@ -186,7 +186,7 @@ function Live({ os, conv, back }: { os: Os; conv: Conversation; back: () => void
         <textarea
           ref={area}
           aria-label="Message text"
-          placeholder="Message"
+          placeholder="发信息"
           rows={1}
           {...stylex.props(styles.input)}
           value={conv.draft}

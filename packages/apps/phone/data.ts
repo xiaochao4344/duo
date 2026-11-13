@@ -67,25 +67,25 @@ const person = (
 
 export const SEED: Book = {
   contacts: [
-    person('jony', 'Jony', '', '+1 (408) 555-0134', 'Apple', { favorite: true }),
-    person('ada', 'Ada', 'Lovelace', '+44 20 7946 0812'),
-    person('mum', 'Mum', '', '+1 (415) 555-0177', '', { favorite: true }),
-    person('kim', 'Kim', 'Minh', '+84 90 555 214', '', { favorite: true }),
-    person('blender', 'Blender', 'Foundation', '+31 20 555 9011', 'Blender Foundation', {
+    person('jony', '王磊', '', '+86 138 0217 4451', 'Apple', { favorite: true }),
+    person('ada', 'Ada', 'Lovelace', '+86 150 2671 8890'),
+    person('mum', '妈妈', '', '+86 139 1882 3304', '', { favorite: true }),
+    person('kim', 'Kim', 'Minh', '+86 136 3639 5521', '', { favorite: true }),
+    person('blender', 'Blender', 'Foundation', '+86 95338', '快递驿站', {
       email: 'foundation@blender.org'
     }),
-    person('alan', 'Alan', 'Turing', '+44 161 555 0918'),
-    person('apple-park', 'Apple Park', 'Reception', '+1 (408) 555-0100', 'Apple', {
+    person('alan', '刘建国', '', '+86 137 8890 2214'),
+    person('apple-park', 'Apple Park', 'Reception', '+86 21 5555 0166', 'Apple', {
       email: 'reception@apple.com'
     }),
-    person('grace', 'Grace', 'Hopper', '+1 (202) 555-0146'),
-    person('hideo', 'Hideo', 'Kojima', '+81 3 5555 2049', 'Kojima Productions'),
-    person('katherine', 'Katherine', 'Johnson', '+1 (757) 555-0163'),
-    person('thanh', 'Nguyễn', 'Thanh', '+84 28 555 771'),
-    person('radia', 'Radia', 'Perlman', '+1 (617) 555-0129'),
-    person('susan', 'Susan', 'Kare', '+1 (415) 555-0188'),
-    person('tim', 'Tim', '', '+1 (408) 555-0111', 'Apple', { favorite: true }),
-    person('vera', 'Vera', 'Rubin', '+1 (520) 555-0154')
+    person('grace', 'Grace', 'Hopper', '+86 135 2480 7719'),
+    person('hideo', 'Hideo', 'Kojima', '+86 188 0176 3342', 'Kojima Productions'),
+    person('katherine', 'Katherine', 'Johnson', '+86 133 9102 6687'),
+    person('thanh', 'Nguyễn', 'Thanh', '+86 159 0098 4413'),
+    person('radia', 'Radia', 'Perlman', '+86 152 2130 9058'),
+    person('susan', 'Susan', 'Kare', '+86 131 2267 1185'),
+    person('tim', '丁总', '', '+86 138 1755 9026', 'Apple', { favorite: true }),
+    person('vera', 'Vera', 'Rubin', '+86 186 2190 7734')
   ],
   favOrder: ['mum', 'jony', 'kim', 'tim']
 }
@@ -93,8 +93,8 @@ export const SEED: Book = {
 export const SEED_RECENTS: Recent[] = [
   {
     id: 'r1',
-    name: 'Mum',
-    number: '+1 (415) 555-0177',
+    name: '妈妈',
+    number: '+86 139 1882 3304',
     contactId: 'mum',
     dir: 'in',
     missed: true,
@@ -102,8 +102,8 @@ export const SEED_RECENTS: Recent[] = [
   },
   {
     id: 'r2',
-    name: 'Jony',
-    number: '+1 (408) 555-0134',
+    name: '王磊',
+    number: '+86 138 0217 4451',
     contactId: 'jony',
     dir: 'out',
     missed: false,
@@ -113,8 +113,8 @@ export const SEED_RECENTS: Recent[] = [
   { id: 'r3', name: '+84 90 555 887', number: '+84 90 555 887', dir: 'in', missed: true, at: Date.now() - 4 * 3600000 },
   {
     id: 'r4',
-    name: 'Apple Park Reception',
-    number: '+1 (408) 555-0100',
+    name: '小区物业',
+    number: '+86 21 5555 0166',
     contactId: 'apple-park',
     dir: 'in',
     missed: false,
@@ -123,8 +123,8 @@ export const SEED_RECENTS: Recent[] = [
   },
   {
     id: 'r5',
-    name: 'Kim Minh',
-    number: '+84 90 555 214',
+    name: '陈静',
+    number: '+86 136 3639 5521',
     contactId: 'kim',
     dir: 'out',
     missed: false,
@@ -133,8 +133,8 @@ export const SEED_RECENTS: Recent[] = [
   },
   {
     id: 'r6',
-    name: 'Hideo Kojima',
-    number: '+81 3 5555 2049',
+    name: '周子昂',
+    number: '+86 188 0176 3342',
     contactId: 'hideo',
     dir: 'in',
     missed: false,
@@ -143,8 +143,8 @@ export const SEED_RECENTS: Recent[] = [
   },
   {
     id: 'r7',
-    name: 'Grace Hopper',
-    number: '+1 (202) 555-0146',
+    name: '赵阿姨',
+    number: '+86 135 2480 7719',
     contactId: 'grace',
     dir: 'out',
     missed: true,
@@ -154,15 +154,15 @@ export const SEED_RECENTS: Recent[] = [
 
 const VM_TEXT: [string, string][] = [
   [
-    'Mum',
+    '妈妈',
     'Hi love, it is Mum. Your aunt arrives Thursday evening now, not Friday, so dinner moved too. Call me back when you land, okay? I left the keys under the blue pot by the door. Talk soon.'
   ],
   [
-    'Apple Park Reception',
+    '小区物业',
     'Good afternoon, this is Apple Park reception. Your visitor badge for tomorrow is ready at the main lobby desk. Bring a photo ID, and ask for the studio tour check in. We will see you at nine.'
   ],
   [
-    'Kim Minh',
+    '陈静',
     'Anh ơi, em gọi nhé. Tối nay quán cà phê đóng sớm nên mình đổi sang chỗ bên cạnh hồ, tám giờ nhé. Nhớ mang theo cái laptop, em cần coi lại file design. Gọi lại cho em khi nào rảnh.'
   ]
 ]

@@ -52,23 +52,23 @@ export const SEED: Book = {
   ],
   contacts: [
     person('me', 'Thành', 'Đoàn', '+84 90 555 0001', 'Doan Labs', { email: 'thanh@doan-labs.com' }),
-    person('jony', 'Jony', '', '+1 (408) 555-0134', 'Apple', { favorite: true, lists: ['studio'] }),
-    person('ada', 'Ada', 'Lovelace', '+44 20 7946 0812', '', { notes: 'Analytical Engine notes, appended.' }),
-    person('mum', 'Mum', '', '+1 (415) 555-0177', '', { favorite: true, lists: ['family'] }),
-    person('kim', 'Kim', 'Minh', '+84 90 555 214', '', { favorite: true, lists: ['studio'] }),
-    person('blender', 'Blender', 'Foundation', '+31 20 555 9011', 'Blender Foundation', {
+    person('jony', '王磊', '', '+86 138 0217 4451', 'Apple', { favorite: true, lists: ['studio'] }),
+    person('ada', 'Ada', 'Lovelace', '+86 150 2671 8890', '', { notes: 'Analytical Engine notes, appended.' }),
+    person('mum', '妈妈', '', '+86 139 1882 3304', '', { favorite: true, lists: ['family'] }),
+    person('kim', 'Kim', 'Minh', '+86 136 3639 5521', '', { favorite: true, lists: ['studio'] }),
+    person('blender', 'Blender', 'Foundation', '+86 95338', '快递驿站', {
       email: 'foundation@blender.org'
     }),
-    person('alan', 'Alan', 'Turing', '+44 161 555 0918'),
-    person('apple-park', 'Apple Park', 'Reception', '+1 (408) 555-0100', 'Apple', { email: 'reception@apple.com' }),
-    person('grace', 'Grace', 'Hopper', '+1 (202) 555-0146'),
-    person('hideo', 'Hideo', 'Kojima', '+81 3 5555 2049', 'Kojima Productions'),
-    person('katherine', 'Katherine', 'Johnson', '+1 (757) 555-0163'),
-    person('thanh', 'Nguyễn', 'Thanh', '+84 28 555 771'),
-    person('radia', 'Radia', 'Perlman', '+1 (617) 555-0129'),
-    person('susan', 'Susan', 'Kare', '+1 (415) 555-0188', '', { lists: ['studio'] }),
-    person('tim', 'Tim', '', '+1 (408) 555-0111', 'Apple', { favorite: true }),
-    person('vera', 'Vera', 'Rubin', '+1 (520) 555-0154')
+    person('alan', '刘建国', '', '+86 137 8890 2214'),
+    person('apple-park', 'Apple Park', 'Reception', '+86 21 5555 0166', 'Apple', { email: 'reception@apple.com' }),
+    person('grace', 'Grace', 'Hopper', '+86 135 2480 7719'),
+    person('hideo', 'Hideo', 'Kojima', '+86 188 0176 3342', 'Kojima Productions'),
+    person('katherine', 'Katherine', 'Johnson', '+86 133 9102 6687'),
+    person('thanh', 'Nguyễn', 'Thanh', '+86 159 0098 4413'),
+    person('radia', 'Radia', 'Perlman', '+86 152 2130 9058'),
+    person('susan', 'Susan', 'Kare', '+86 131 2267 1185', '', { lists: ['studio'] }),
+    person('tim', '丁总', '', '+86 138 1755 9026', 'Apple', { favorite: true }),
+    person('vera', 'Vera', 'Rubin', '+86 186 2190 7734')
   ]
 }
 

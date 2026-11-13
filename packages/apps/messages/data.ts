@@ -44,22 +44,25 @@ export type Conversation = {
   pending?: Pending
 }
 
+// The cast is Chinese in this fork: same ids as Phone and Contacts carry,
+// so a thread opened from Phone by `os.open('Messages', name)` still finds
+// its person - the names and numbers match across all three copies.
 export const PEOPLE: Person[] = [
-  { id: 'jony', name: 'Jony', number: '+1 (408) 555-0134' },
-  { id: 'ada', name: 'Ada Lovelace', number: '+44 20 7946 0812' },
-  { id: 'mum', name: 'Mum', number: '+1 (415) 555-0177' },
-  { id: 'kim', name: 'Kim Minh', number: '+84 90 555 214' },
-  { id: 'blender', name: 'Blender Foundation', number: '+31 20 555 9011' },
-  { id: 'alan', name: 'Alan Turing', number: '+44 161 555 0918' },
-  { id: 'apple-park', name: 'Apple Park Reception', number: '+1 (408) 555-0100' },
-  { id: 'grace', name: 'Grace Hopper', number: '+1 (202) 555-0146' },
-  { id: 'hideo', name: 'Hideo Kojima', number: '+81 3 5555 2049' },
-  { id: 'katherine', name: 'Katherine Johnson', number: '+1 (757) 555-0163' },
-  { id: 'thanh', name: 'Nguyễn Thanh', number: '+84 28 555 771' },
-  { id: 'radia', name: 'Radia Perlman', number: '+1 (617) 555-0129' },
-  { id: 'susan', name: 'Susan Kare', number: '+1 (415) 555-0188' },
-  { id: 'tim', name: 'Tim', number: '+1 (408) 555-0111' },
-  { id: 'vera', name: 'Vera Rubin', number: '+1 (520) 555-0154' }
+  { id: 'jony', name: '王磊', number: '+86 138 0217 4451' },
+  { id: 'ada', name: '林小雨', number: '+86 150 2671 8890' },
+  { id: 'mum', name: '妈妈', number: '+86 139 1882 3304' },
+  { id: 'kim', name: '陈静', number: '+86 136 3639 5521' },
+  { id: 'blender', name: '快递驿站', number: '+86 95338' },
+  { id: 'alan', name: '刘建国', number: '+86 137 8890 2214' },
+  { id: 'apple-park', name: '小区物业', number: '+86 21 5555 0166' },
+  { id: 'grace', name: '赵阿姨', number: '+86 135 2480 7719' },
+  { id: 'hideo', name: '周子昂', number: '+86 188 0176 3342' },
+  { id: 'katherine', name: '吴秀英', number: '+86 133 9102 6687' },
+  { id: 'thanh', name: '徐天成', number: '+86 159 0098 4413' },
+  { id: 'radia', name: '沈佳怡', number: '+86 152 2130 9058' },
+  { id: 'susan', name: '高敏', number: '+86 131 2267 1185' },
+  { id: 'tim', name: '丁总', number: '+86 138 1755 9026' },
+  { id: 'vera', name: '郑文博', number: '+86 186 2190 7734' }
 ]
 
 const say = (id: string, at: number, text: string, me = false): Message => ({ id, at, me, text })
@@ -76,8 +79,8 @@ export function seedConversations(now = Date.now()): Conversation[] {
       unread: 2,
       draft: '',
       messages: [
-        say('m-j1', now - 40 * 60000, 'The chamfer catches the strip light beautifully.'),
-        say('m-j2', now - 2 * 60000, 'Did you ship the titanium yet?')
+        say('m-j1', now - 40 * 60000, '方案我改完了，刚发你邮箱'),
+        say('m-j2', now - 2 * 60000, '明早九点例会，别迟到')
       ]
     },
     {
@@ -86,8 +89,8 @@ export function seedConversations(now = Date.now()): Conversation[] {
       unread: 0,
       draft: '',
       messages: [
-        say('m-m1', now - D - 2 * H, 'Do not forget your aunt lands Thursday now.'),
-        say('m-m2', now - D - H, 'Call me when you land ❤️')
+        say('m-m1', now - D - 2 * H, '你姑姑周四到上海，记得去接一下'),
+        say('m-m2', now - D - H, '落地了给我打个电话 ❤️')
       ]
     },
     {
@@ -96,8 +99,8 @@ export function seedConversations(now = Date.now()): Conversation[] {
       unread: 1,
       draft: '',
       messages: [
-        say('m-a1', now - 4 * D, 'The Analytical Engine weaves algebraic patterns.', true),
-        say('m-a2', now - 4 * D + 12 * 60000, 'Send me the render when it finishes?')
+        say('m-a1', now - 4 * D, '图我渲染好了，就是还有点噪点', true),
+        say('m-a2', now - 4 * D + 12 * 60000, '发我看看，这次效果应该不错')
       ]
     },
     {
@@ -105,14 +108,14 @@ export function seedConversations(now = Date.now()): Conversation[] {
       personId: 'kim',
       unread: 0,
       draft: '',
-      messages: [say('m-k1', now - 6 * D, 'quán cà phê 8h nhé'), say('m-k2', now - 6 * D + 5 * 60000, 'mang laptop đi')]
+      messages: [say('m-k1', now - 6 * D, '晚上八点，老地方'), say('m-k2', now - 6 * D + 5 * 60000, '记得带电脑')]
     },
     {
       id: 'c-blender',
       personId: 'blender',
       unread: 0,
       draft: '',
-      messages: [say('m-b1', now - 12 * D, 'Cycles 5.2 is out. AgX by default.')]
+      messages: [say('m-b1', now - 12 * D, '您的快递已放入 3 号柜，取件码 4821')]
     }
   ]
 }
@@ -163,17 +166,21 @@ export const digits = (s: string) => {
   return s.trim().startsWith('+') ? `+${d}` : d
 }
 
-/** A typed string dials like the keypad does: (408) 555-0134, or +84 90 555 214. */
+/** A typed string dials like the keypad does: 138 0217 4451, or +86 138 0217 4451. */
 export function formatNumber(raw: string) {
   const d = digits(raw)
   if (!d) return ''
   if (d.startsWith('+')) {
     const rest = d.slice(1)
+    // A Chinese mobile under +86 groups 3-4-4 after the country code.
+    if (rest.startsWith('86') && rest.length === 13) return `+86 ${rest.slice(2, 5)} ${rest.slice(5, 9)} ${rest.slice(9)}`
     const groups: string[] = []
     if (rest.length > 2) groups.push(rest.slice(0, 2), ...rest.slice(2).match(/.{1,3}/g)!)
     else groups.push(rest)
     return `+${groups.filter(Boolean).join(' ')}`
   }
+  // A domestic 11-digit mobile groups 3-4-4, not the US pattern.
+  if (d.length === 11 && d.startsWith('1')) return `${d.slice(0, 3)} ${d.slice(3, 7)} ${d.slice(7)}`
   const n = d.length === 11 && d.startsWith('1') ? d.slice(1) : d
   if (n.length > 10) return n.match(/.{1,3}/g)!.join(' ')
   const parts = [n.slice(0, 3), n.slice(3, 6), n.slice(6, 10)]
@@ -213,22 +220,22 @@ const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString()
 /** The inbox stamp: today reads as a time, this week as a day, else the date. */
 export function when(at: number, now = new Date()) {
   const d = new Date(at)
-  if (sameDay(d, now)) return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }).replace(/\s?[AP]M/i, '')
+  if (sameDay(d, now)) return d.toLocaleTimeString('zh-CN', { hour: 'numeric', minute: '2-digit', hour12: false })
   const week = new Date(now)
   week.setDate(now.getDate() - 6)
-  if (d > week) return d.toLocaleDateString([], { weekday: 'long' })
-  return d.toLocaleDateString([], { month: 'short', day: 'numeric' })
+  if (d > week) return d.toLocaleDateString('zh-CN', { weekday: 'long' })
+  return d.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' })
 }
 
 /** The stamp a bubble group break shows inside a thread. */
 export function threadStamp(at: number, now = new Date()) {
   const d = new Date(at)
-  const time = d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
+  const time = d.toLocaleTimeString('zh-CN', { hour: 'numeric', minute: '2-digit', hour12: false })
   if (sameDay(d, now)) return time
   const week = new Date(now)
   week.setDate(now.getDate() - 6)
-  if (d > week) return `${d.toLocaleDateString([], { weekday: 'long' })} ${time}`
-  return `${d.toLocaleDateString([], { month: 'short', day: 'numeric' })} ${time}`
+  if (d > week) return `${d.toLocaleDateString('zh-CN', { weekday: 'long' })} ${time}`
+  return `${d.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' })} ${time}`
 }
 
 /** Two bubbles share a group when the same sender wrote them inside four minutes. */
@@ -246,45 +253,41 @@ export const sameBurst = (a: Message, b: Message) => a.me === b.me && b.at - a.a
  */
 const PERSONA: Record<string, { q: string[]; g: string[]; s: string[] }> = {
   jony: {
-    q: ['It shipped this morning - you will like the chamfer.', 'Tomorrow. The render farm is still chewing.'],
-    g: ['Good to hear from you. The cover build just landed.'],
-    s: ['The chamfer says yes.', 'Send me the screenshot when it lands.', 'Good. Make the edge a touch softer.']
+    q: ['发了，今早刚寄出去。', '明天吧，服务器还在跑。'],
+    g: ['好久没联系了，最近怎么样'],
+    s: ['可以，就这么定。', '截图发我看看。', '好，边缘再磨一下就行。']
   },
   mum: {
-    q: ['Of course, love. Dinner is at seven.', 'Yes - your aunt arrives Thursday now.'],
-    g: ['Hello love, I was just thinking of you.'],
-    s: ['Call me when you land ❤️', 'Lovely. Your father says hi.', 'Do not work too hard, love.']
+    q: ['当然行，晚上七点吃饭。', '对，你姑姑改周四到了。'],
+    g: ['正想给你打电话呢。'],
+    s: ['落地了给我打个电话 ❤️', '好。你爸问你好。', '别太累着了。']
   },
   ada: {
-    q: ['It weaves the pattern you described - send the render?', 'Thursday. The Engine is agreeable.'],
-    g: ['A pleasure as always. The numbers are behaving.'],
-    s: [
-      'The Analytical Engine approves.',
-      'Most elegant. Send me the render when it finishes?',
-      'Algebraic patterns, as promised.'
-    ]
+    q: ['按你说的那版织出来了，图发你？', '周四吧，今天排满了。'],
+    g: ['好久不见，数据都正常。'],
+    s: ['这版我觉得很稳。', '渲染完发你看看？', '就按这个走。']
   },
   kim: {
-    q: ['8h nhé, quán bên cạnh hồ.', 'Có, mang laptop đi.'],
-    g: ['anh ơi, em đang online'],
-    s: ['ok anh 👍', 'nhớ mang theo laptop nhé', 'hẹn 8h']
+    q: ['八点，老地方。', '带，我记着呢。'],
+    g: ['在呢，说'],
+    s: ['好 👍', '别忘了带电脑', '八点见']
   },
   blender: {
-    q: ['Cycles 5.2 ships AgX by default - try it.', 'On the tracker, issue 1042.'],
-    g: ['Hello from the Institute.'],
-    s: ['AgX by default. Enjoy.', 'The release notes are up.', 'Send us the render.']
+    q: ['在 3 号柜，取件码 4821。', '单号我帮您查一下。'],
+    g: ['您好，这里是快递驿站。'],
+    s: ['已入库，请及时取件。', '驿站营业到晚上十点。', '有问题随时找我。']
   },
   tim: {
-    q: ['Thursday works - send the invite.', 'Ask Jony, he has the prototypes.'],
-    g: ['Good morning. Big week for the team.'],
-    s: ['Looks great on the cover.', 'Thanks for sending this over.']
+    q: ['周四可以，把邀请发我。', '问王磊，样机在他那儿。'],
+    g: ['早，这周事不少。'],
+    s: ['看着不错。', '收到了，谢谢。']
   }
 }
 
 const GENERIC = {
-  q: ['Let me check and get back to you.', 'Yes, that works.'],
-  g: ['Hey, good to hear from you.'],
-  s: ['On it 👍', 'Sounds good.', 'Sending it over now.', 'Agreed.']
+  q: ['我确认一下再回你。', '行，没问题。'],
+  g: ['你好，好久不见。'],
+  s: ['收到 👍', '好的。', '这就发你。', '同意。']
 }
 
 /**
@@ -296,6 +299,10 @@ export function replyFor(person: Person | undefined, conv: Conversation, sent: s
   if (!person) return undefined
   const p = PERSONA[person.id] ?? GENERIC
   const s = sent.trim()
-  const pool = s.includes('?') ? p.q : s.length < 40 && /^(hi|hey|hello|yo|xin ch|chào|anh|em)\b/i.test(s) ? p.g : p.s
+  const pool = /[?？]/.test(s) || s.includes('吗')
+    ? p.q
+    : s.length < 40 && /^(hi|hey|hello|yo|你好|您好|在吗|早上好|早)/i.test(s)
+      ? p.g
+      : p.s
   return pool[(hue(`${person.id}:${s}`) + conv.messages.length) % pool.length]!
 }

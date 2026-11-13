@@ -42,7 +42,7 @@ export const Messages = ({ os }: { os: Os }) => {
             <Inbox />
           </div>
           <div {...stylex.props(styles.main)}>
-            {pane ?? <Placeholder xstyle={[styles.paneEmpty]}>Select a conversation</Placeholder>}
+            {pane ?? <Placeholder xstyle={[styles.paneEmpty]}>选择一个对话</Placeholder>}
           </div>
         </div>
       ) : (
