@@ -12,7 +12,8 @@ export function useNow() {
   }, [])
   return now
 }
+// The system language of this fork is Chinese: a 24-hour clock, and the
+// lock-screen date spelled the way iOS does in Chinese (month, day, weekday).
 export const clock = (d: Date) =>
-  d.toLocaleTimeString('en', { hour: 'numeric', minute: '2-digit' }).replace(/ [AP]M/, '')
-export const dateOf = (d: Date) =>
-  d.toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '')
+  d.toLocaleTimeString('zh-CN', { hour: 'numeric', minute: '2-digit', hour12: false })
+export const dateOf = (d: Date) => d.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' })

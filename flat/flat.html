@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" class="web">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flat iPhone 16 harness (temp test)</title>
+    <style>
+      @layer reset;
+      @layer reset {
+        * { margin: 0; box-sizing: border-box; scrollbar-width: none; }
+        ::-webkit-scrollbar { display: none; }
+        button, input, textarea { font: inherit; color: inherit; }
+        button { border: 0; background: none; cursor: pointer; }
+        img { -webkit-user-drag: none; }
+        iframe { border: 0; width: 100%; height: 100%; background: #fff; display: block; }
+        video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
+        html, body { height: 100%; overflow: hidden; }
+        body {
+          font: 400 17px/22px -apple-system, BlinkMacSystemFont, system-ui, "Helvetica Neue", sans-serif;
+          letter-spacing: -0.43px; color: #1d1d1f;
+          -webkit-user-select: none; user-select: none;
+          background: #ececea; display: grid; place-items: center;
+        }
+      }
+      /* iPhone 16 slab frame: 393x852 pt screen, titanium-ish bezel drawn in CSS. */
+      #frame {
+        width: 411px; height: 870px; border-radius: 56px; padding: 9px;
+        background: linear-gradient(145deg, #b8b4ad, #8e8a84 40%, #a9a59e);
+        box-shadow: 0 24px 60px rgba(0,0,0,.35), inset 0 0 0 2px #6f6c67;
+      }
+      #stage { width: 393px; height: 852px; border-radius: 47px; overflow: hidden; background: #000; position: relative; }
+    </style>
+  </head>
+  <body>
+    <div id="frame"><div id="stage"></div></div>
+    <script type="module" src="./flat.ts"></script>
+  </body>
+</html>

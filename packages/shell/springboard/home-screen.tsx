@@ -117,12 +117,18 @@ export function HomeScreen({
   // or null when it has no room. Measured off the glass's own centre, which is
   // stationary - the other tiles are mid-transition while they slide, so their
   // rects would flicker the index as a centre crosses the finger.
-  const dockAtOf = (d: Element, app: string, at: PointerEvent) => {
+  const dockAtOf = (d: Element, app: string, at: PointerEvent, bar: boolean) => {
     const now = grid()
     if (!now.dock.includes(app) && now.dock.length >= DOCK_MAX) return null
     const r = d.getBoundingClientRect()
     const s = d.clientWidth / r.width // screen px -> layout px
     const n = now.dock.filter((x) => x !== app).length // the tiles besides the carried one
+    if (bar) {
+      // The bottom bar: 51 px icons on a 63 px pitch inside 12 px of glass at each end.
+      const w = 12 + (n + 1) * 51 + n * 12 + 12 // the glass with the gap open
+      const x = (at.clientX - (r.left + r.width / 2)) * s + w / 2
+      return Math.min(n, Math.max(0, Math.floor((x - 12 + 6) / 63)))
+    }
     const h = 8 + (n + 1) * 41 + n * 9 + 8 // the glass with the gap open
     const y = (at.clientY - (r.top + r.height / 2)) * s + h / 2
     return Math.min(n, Math.max(0, Math.floor((y - 8 + 4.5) / 50)))
@@ -232,7 +238,7 @@ export function HomeScreen({
       el,
       (under, at) => {
         const d = under?.closest('[data-dock]')
-        const dockAt = d ? dockAtOf(d, app, at) : null
+        const dockAt = d ? dockAtOf(d, app, at, !homeWide) : null
         const hot = dockAt === null ? cellAt(under) : null
         const prev = last.current
         if (prev && prev.hot === hot && prev.dockAt === dockAt) return
@@ -299,8 +305,8 @@ export function HomeScreen({
     })
 
   const left = (
-    <div key="left" data-half="left" {...stylex.props(styles.half)}>
-      <WidgetTile i={0} name="Weather">
+    <div key="left" data-half="left" {...stylex.props(styles.half, !homeWide && styles.halfTall)}>
+      <WidgetTile i={0} name="天气">
         <WeatherSnapshot
           onOpen={(el) => {
             const app = byName('Weather')
@@ -308,14 +314,14 @@ export function HomeScreen({
           }}
         />
       </WidgetTile>
-      <WidgetTile i={1} name="Calendar">
+      <WidgetTile i={1} name="日历">
         <CalendarWidget onOpen={(el) => onOpen(byName('Calendar')!, el)} />
       </WidgetTile>
       {tiles('left', 2)}
     </div>
   )
   const right = (
-    <div key="right" data-half="right" {...stylex.props(styles.half)}>
+    <div key="right" data-half="right" {...stylex.props(styles.half, !homeWide && styles.halfTall)}>
       {tiles('right', 0)}
     </div>
   )
@@ -337,7 +343,8 @@ export function HomeScreen({
     if (!carry || carry.app === n) return undefined
     let vis = cells.dock.filter((x) => x !== carry.app).indexOf(n)
     if (gap && vis >= carry.dockAt!) vis += 1
-    const shift = (vis - k) * 50
+    // Slot pitch: 41 + 9 down the rail, 51 + 12 along the bottom bar.
+    const shift = (vis - k) * (homeWide ? 50 : 63)
     return shift === 0 ? undefined : shift
   }
   // A dock-origin tile occupies no slot while carried, so it never counts;
@@ -385,31 +392,41 @@ export function HomeScreen({
         </div>
       </div>
       {pages.length > 1 && (
-        <div {...stylex.props(styles.dots)}>
+        <div {...stylex.props(styles.dots, !homeWide && styles.dotsBar)}>
           {pages.map((p, i) => (
             <i key={p.id} {...stylex.props(styles.dot, i === page && styles.dotOn)} onClick={() => turn(i)} />
           ))}
         </div>
       )}
-      <div data-dock {...stylex.props(shared.glass, styles.dock, styles.dockHeight(dockN))}>
+      <div
+        data-dock
+        {...stylex.props(
+          shared.glass,
+          styles.dock,
+          homeWide ? styles.dockHeight(dockN) : [styles.dockBar, styles.dockBarSize(dockN)]
+        )}
+      >
         {cells.dock.map((n, k) => {
           const a = byName(n)
+          const sh = shiftOf(n, k)
           return (
             a && (
               <Tile
                 key={n}
                 a={a}
                 dock
+                bar={!homeWide}
                 onOpen={onOpen}
                 onHold={(down, el) => carryOff(n, 'dock', down, el)}
                 shake={!!carry && carry.app !== n}
-                shift={shiftOf(n, k)}
+                shift={homeWide ? sh : undefined}
+                shiftX={!homeWide ? sh : undefined}
               />
             )
           )
         })}
       </div>
-      <div ref={searchRef} {...stylex.props(shared.glass, styles.srch)} onClick={onSearch}>
+      <div ref={searchRef} {...stylex.props(shared.glass, styles.srch, !homeWide && styles.srchBar)} onClick={onSearch}>
         <Magnifier />
       </div>
       {folder && (
@@ -471,7 +488,8 @@ const styles = stylex.create({
     paddingBottom: 0
   },
   pageWide: { paddingLeft: 48 },
-  pageNarrow: { paddingLeft: 7 },
+  // The slab page clears the bottom bar: the grid's last row ends above it.
+  pageNarrow: { paddingLeft: 7, paddingBottom: 104 },
   half: {
     pointerEvents: 'auto',
     display: 'grid',
@@ -480,6 +498,9 @@ const styles = stylex.create({
     alignContent: 'start',
     justifyItems: 'center'
   },
+  // The slab is 852 tall against the cover's 563: the same six rows take a
+  // taller pitch so the grid fills the display instead of packing at the top.
+  halfTall: { gridAutoRows: '100px' },
   // Dots and dock both clear the hinge side: the dots centre on the content, not
   // on the glass, or they sit visibly right of the apps they belong to.
   dots: {
@@ -531,6 +552,33 @@ const styles = stylex.create({
     height: 8 + n * 41 + Math.max(0, n - 1) * 9 + 8,
     top: `calc(52.5% - ${(8 + n * 41 + Math.max(0, n - 1) * 9 + 8) / 2}px)`
   }),
+  // The bottom bar on the slab: a row of full-size (51 px) icons on a 63 px
+  // pitch inside 12 px of glass at each end, centred the same way the rail
+  // centres itself - the width rides in the style, never a transform.
+  dockBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: 12,
+    paddingTop: 0,
+    paddingLeft: 12,
+    paddingRight: 12,
+    right: 'auto',
+    transitionProperty: 'width, left',
+    transitionDuration: '.25s',
+    transitionTimingFunction: easing.push
+  },
+  dockBarSize: (n: number) => ({
+    width: 12 + n * 51 + Math.max(0, n - 1) * 12 + 12,
+    height: 79,
+    left: `calc(50% - ${(12 + n * 51 + Math.max(0, n - 1) * 12 + 12) / 2}px)`,
+    bottom: 12,
+    top: 'auto'
+  }),
+  // The dots centre on the whole display once the rail is gone, and sit
+  // just above the bar.
+  dotsBar: { right: 0, bottom: 100 },
+  srchBar: { bottom: 96, right: 14, width: 36, height: 36 },
   srch: {
     position: 'absolute',
     right: 16,

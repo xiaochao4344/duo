@@ -65,9 +65,9 @@ export const seedEvents = (today: Date): Event[] => [
   // The home-screen widget draws this one, so the tile and the app agree.
   {
     id: 'seed-keynote',
-    title: 'Duo keynote',
+    title: '产品发布会',
     calendar: 'work',
-    location: 'Apple Park',
+    location: '苹果园区',
     start: local(at(today, '10:00')),
     end: local(at(today, '11:30'))
   }

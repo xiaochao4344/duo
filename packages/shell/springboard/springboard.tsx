@@ -298,6 +298,7 @@ export function SpringBoard({ w, hgt, boot, arg, shots }: SpringBoardProps) {
           light={lit && !cc}
           covered={!!topRight && !railed}
           cc={cc}
+          locked={locked}
           open={locked || asleep ? undefined : launch}
         />
 

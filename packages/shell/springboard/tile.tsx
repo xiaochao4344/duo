@@ -24,6 +24,7 @@ import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
 import { type ReactNode, type Ref, useRef, useState } from 'react'
 import { byName } from '../apps.ts'
+import { labelOf } from '../labels.ts'
 
 /** How long a press stays still before it is a hold: iOS's home-screen figure. */
 export const HOLD = 500
@@ -85,21 +86,27 @@ export function Tile({
   a,
   i,
   dock,
+  bar,
   cell,
   hot,
   shake,
   shift,
+  shiftX,
   onOpen,
   onHold
 }: {
   a: App
   i?: number
   dock?: boolean
+  /** In the bottom bar (slab form) rather than the rail: full-size icon, slides on X. */
+  bar?: boolean
   cell?: string
   hot?: boolean
   shake?: boolean
   /** How far the tile slides to make room in the dock, in px. */
   shift?: number
+  /** The same slide on the X axis, for the bottom bar. */
+  shiftX?: number
   onOpen: Open
   onHold?: Hold
 }) {
@@ -127,7 +134,8 @@ export function Tile({
         styles.tile,
         dock && styles.tileDock,
         i !== undefined && [styles.land, delay.ms(i * 17)],
-        shift !== undefined && styles.shift(shift)
+        shift !== undefined && styles.shift(shift),
+        shiftX !== undefined && styles.shiftX(shiftX)
       )}
       onClick={() => !held.current && onOpen(a, icon.current!)}
       onPointerDown={(e) => {
@@ -151,10 +159,10 @@ export function Tile({
       onPointerCancel={up}
     >
       <div data-icon {...stylex.props(styles.iconWrap, hot && styles.iconWrapHot, shake && styles.shake)}>
-        <Icon ref={icon} a={a} size={dock ? styles.iconDock : undefined} pressed={pressed} hot={hot} />
+        <Icon ref={icon} a={a} size={dock && !bar ? styles.iconDock : undefined} pressed={pressed} hot={hot} />
         {a.mock && <span {...stylex.props(styles.mockDot)} title="Mockup" />}
       </div>
-      {a.name}
+      {labelOf(a)}
     </div>
   )
 }
@@ -247,6 +255,7 @@ const styles = stylex.create({
   },
   iconDock: { width: 41, height: 41 },
   shift: (px: number) => ({ transform: `translateY(${px}px)` }),
+  shiftX: (px: number) => ({ transform: `translateX(${px}px)` }),
   iconPressed: { transform: 'scale(.88)' },
   // Folder tile: a blurred well showing the grid it holds.
   fold: {

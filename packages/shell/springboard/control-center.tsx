@@ -254,7 +254,7 @@ function NowTile({ onExpand }: { onExpand: () => void }) {
     <div {...stylex.props(styles.tile, styles.playing)}>
       <div {...stylex.props(styles.playHead)} onClick={onExpand}>
         <div {...stylex.props(styles.playText)}>
-          <b {...stylex.props(styles.playTitle)}>{d.started ? name : 'Not Playing'}</b>
+          <b {...stylex.props(styles.playTitle)}>{d.started ? name : '未播放'}</b>
           {d.started && <div {...stylex.props(styles.playSub)}>{who}</div>}
         </div>
         <span {...stylex.props(styles.dim)}>
@@ -278,7 +278,7 @@ function Media({ level, onLevel }: { level: number; onLevel: (v: number) => void
       <div {...stylex.props(styles.cover, d.started && styles.coverArt(`url(${cover})`))} onClick={() => d.toggle()} />
       <div {...stylex.props(styles.playHead)}>
         <div {...stylex.props(styles.playText)}>
-          <b {...stylex.props(styles.mTitle)}>{d.started ? name : 'Not Playing'}</b>
+          <b {...stylex.props(styles.mTitle)}>{d.started ? name : '未播放'}</b>
           {d.started && <div {...stylex.props(styles.playSub)}>{who}</div>}
         </div>
         <span {...stylex.props(styles.dim)}>

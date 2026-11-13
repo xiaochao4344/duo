@@ -5,7 +5,7 @@ import { colors, leading, space, tracking, typeScale } from './tokens.stylex.ts'
 
 export function widgetAge(updatedAt: number, now = Date.now()) {
   const age = now - updatedAt
-  return age >= 86400000 ? 'Open to refresh' : age >= 3600000 ? `Updated ${Math.floor(age / 3600000)} h ago` : ''
+  return age >= 86400000 ? '打开以刷新' : age >= 3600000 ? `${Math.floor(age / 3600000)} 小时前更新` : ''
 }
 /** Host-rendered declarative snapshot. Refresh remains the app owner's responsibility. */
 export type WidgetProps = {

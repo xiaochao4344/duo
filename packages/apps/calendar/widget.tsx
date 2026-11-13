@@ -10,13 +10,13 @@ export function CalendarWidget({ onOpen }: { onOpen: (from: HTMLElement) => void
   const today = new Date()
   return (
     <div ref={el} {...stylex.props(shared.glass, shared.widget, styles.calWidget)} onClick={() => onOpen(el.current!)}>
-      <WidgetLabel xstyle={[styles.calDay]}>{today.toLocaleDateString('en', { weekday: 'long' })}</WidgetLabel>
+      <WidgetLabel xstyle={[styles.calDay]}>{today.toLocaleDateString('zh-CN', { weekday: 'long' })}</WidgetLabel>
       <div {...stylex.props(styles.calNum)}>{today.getDate()}</div>
       {/* Short enough for one line each: screen.ts bakes the same widget on canvas,
           which does not wrap, and a line that wraps here would not wrap there. */}
       <div {...stylex.props(styles.calEv)}>
-        Duo keynote
-        <div {...stylex.props(styles.calSub)}>10:00 Apple Park</div>
+        产品发布会
+        <div {...stylex.props(styles.calSub)}>10:00 苹果园区</div>
       </div>
     </div>
   )

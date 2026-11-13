@@ -17,8 +17,8 @@ export type Slot = string | Folder
 export type Half = 'left' | 'right'
 /** The two halves plus the dock, which holds apps only, never folders. */
 export type Grid = Record<Half, Slot[]> & { dock: string[] }
-/** The most icons the dock takes: more would reach the status stack and the search button. */
-export const DOCK_MAX = 8
+/** The most icons the dock takes: the bottom bar on the slab fits four at grid size. */
+export const DOCK_MAX = 4
 
 export const isFolder = (s: Slot): s is Folder => typeof s !== 'string'
 

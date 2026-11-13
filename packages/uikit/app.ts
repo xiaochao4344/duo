@@ -7,6 +7,8 @@ export type App = {
   id?: string
   icon?: string
   name: string
+  /** The display label, when it differs from the name (the shell's Chinese labels live in shell/labels.ts). */
+  label?: string
   light?: boolean
   /** Draws under the status stack, edge to edge, and pads its own top; the shell adds no band. */
   edge?: boolean
