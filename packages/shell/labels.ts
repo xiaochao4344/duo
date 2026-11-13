@@ -8,6 +8,9 @@
 import type { App } from '@doan-labs/duo-uikit/app.ts'
 
 export const LABELS: Record<string, string> = {
+  WeChat: '微信',
+  BaiduMap: '百度地图',
+  Tapo: 'Tapo',
   FaceTime: 'FaceTime 通话',
   Calendar: '日历',
   Photos: '照片',

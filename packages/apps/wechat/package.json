@@ -1,0 +1,1 @@
+{"dependencies":{"@doan-labs/duo-fixtures":"workspace:*","@doan-labs/duo-sdk":"workspace:*","@doan-labs/duo-uikit":"workspace:*","@stylexjs/stylex":"0.19.0","react":"^19"},"exports":{".":"./index.tsx","./*":"./*"},"name":"@doan-labs/duo-app-wechat","private":true,"scripts":{"typecheck":"tsc --noEmit -p tsconfig.json"},"type":"module","version":"0.0.0"}

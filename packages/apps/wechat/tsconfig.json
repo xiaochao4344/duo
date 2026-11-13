@@ -1,0 +1,1 @@
+{"exclude":["desktop","node_modules"],"extends":"../../../tsconfig.json","include":["**/*.ts","**/*.tsx"]}

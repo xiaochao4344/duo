@@ -249,8 +249,31 @@ const wallet = svg(`<defs>${SHEEN}
 <rect x="34" y="100" width="124" height="46" rx="11" fill="url(#w2)"/>
 <rect x="34" y="110" width="124" height="10" fill="#f2f2f7" fill-opacity=".92"/>`)
 
+// --- this fork's three Chinese-service apps, drawn the same way ------------
+const wechat = svg(`<defs>${SHEEN}</defs>${body('#07C160')}
+<ellipse cx="82" cy="88" rx="40" ry="30" fill="#fff"/>
+<path d="M58 108 L52 128 L76 114 Z" fill="#fff"/>
+<ellipse cx="122" cy="106" rx="32" ry="24" fill="#fff" opacity=".92"/>
+<path d="M138 122 L146 138 L124 128 Z" fill="#fff" opacity=".92"/>
+<circle cx="68" cy="86" r="4.5" fill="#07C160"/><circle cx="96" cy="86" r="4.5" fill="#07C160"/>
+<circle cx="112" cy="104" r="3.8" fill="#07C160"/><circle cx="132" cy="104" r="3.8" fill="#07C160"/>`)
+
+const baidumap = svg(`<defs>${SHEEN}</defs>${body('#F5F7FA')}
+<path d="M96 26 C66 26 48 48 48 74 C48 108 96 166 96 166 C96 166 144 108 144 74 C144 48 126 26 96 26Z" fill="#E60012"/>
+<circle cx="96" cy="74" r="24" fill="#fff"/>
+<circle cx="96" cy="74" r="11" fill="#3385FF"/>`)
+
+const tapo = svg(`<defs>${SHEEN}</defs>${body('#00838F')}
+<circle cx="96" cy="96" r="46" fill="none" stroke="#fff" stroke-width="10"/>
+<circle cx="96" cy="96" r="20" fill="#fff"/>
+<circle cx="96" cy="96" r="8" fill="#00838F"/>
+<circle cx="140" cy="52" r="7" fill="#7CE3D8"/>`)
+
 /** App icon by display name. */
 export const ICONS: Record<string, string> = {
+  WeChat: wechat,
+  BaiduMap: baidumap,
+  Tapo: tapo,
   Phone: phone,
   Safari: safari,
   Messages: messages,

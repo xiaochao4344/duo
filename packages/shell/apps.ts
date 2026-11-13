@@ -4,6 +4,9 @@
 // row on screen.
 
 import { AppStore } from '@doan-labs/duo-app-appstore/index.tsx'
+import { BaiduMap } from '@doan-labs/duo-app-baidu-map/index.tsx'
+import { Tapo } from '@doan-labs/duo-app-tapo/index.tsx'
+import { WeChat } from '@doan-labs/duo-app-wechat/index.tsx'
 import { Camera } from '@doan-labs/duo-app-camera/index.tsx'
 import { FaceTime } from '@doan-labs/duo-app-facetime/index.tsx'
 import { Files } from '@doan-labs/duo-app-files/index.tsx'
@@ -71,6 +74,10 @@ export const LEFT: App[] = [
 
 /** Right half — only on the inner display, rows 1 to 6. */
 export const RIGHT: App[] = [
+  // This fork's own baked apps for the Chinese production surface.
+  { name: 'WeChat', light: true, view: WeChat },
+  { name: 'BaiduMap', light: true, view: BaiduMap },
+  { name: 'Tapo', light: true, view: Tapo },
   { name: 'Weather', id: 'labs.doan.ipduo.weather', edge: true, ...RELEASE },
   { name: 'Stocks', id: 'labs.doan.ipduo.stocks', ...RELEASE },
   { name: 'Home', id: 'labs.doan.ipduo.home', light: true, ...RELEASE },
@@ -89,7 +96,7 @@ export const RIGHT: App[] = [
 
 /** The bottom dock on the slab (the rail on the folded cover). A dock app is not also on a page. */
 export const DOCK: App[] = [
-  { name: 'Phone', mock: true, view: Phone },
+  { name: 'Phone', view: Phone },
   { name: 'Safari', light: true, rail: true, view: Safari },
   { name: 'Messages', light: true, view: Messages },
   { name: 'Music', view: Music }
