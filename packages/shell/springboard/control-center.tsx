@@ -308,12 +308,12 @@ function Media({ level, onLevel }: { level: number; onLevel: (v: number) => void
 function Network() {
   const t = useToggles()
   const rows = [
-    ['airplane', 'Airplane Mode', colors.orange, <Sym key="a" name="airplane" size={18} />, t.airplane ? 'On' : 'Off'],
-    ['drop', 'AirDrop', colors.blueDark, <Sym key="d" name="bluetooth" size={18} />, t.drop ? 'Contacts Only' : 'Off'],
-    ['wifi', 'Wi-Fi', colors.blueDark, <Sym key="w" name="wifi" size={18} />, t.wifi ? NETWORK : 'Off'],
-    ['bt', 'Bluetooth', colors.blueDark, <Bluetooth key="b" size={18} />, t.bt ? 'On' : 'Off'],
-    ['cell', 'Cellular Data', colors.green, <Sym key="c" name="antenna" size={18} />, t.cell ? 'On' : 'Off'],
-    ['hotspot', 'Personal Hotspot', colors.green, <Sym key="h" name="iphone" size={18} />, t.hotspot ? 'On' : 'Off']
+    ['airplane', '飞行模式', colors.orange, <Sym key="a" name="airplane" size={18} />, t.airplane ? '开' : '关'],
+    ['drop', '隔空投送', colors.blueDark, <Sym key="d" name="bluetooth" size={18} />, t.drop ? '仅限联系人' : '关'],
+    ['wifi', '无线局域网', colors.blueDark, <Sym key="w" name="wifi" size={18} />, t.wifi ? NETWORK : '关'],
+    ['bt', '蓝牙', colors.blueDark, <Bluetooth key="b" size={18} />, t.bt ? '开' : '关'],
+    ['cell', '蜂窝数据', colors.green, <Sym key="c" name="antenna" size={18} />, t.cell ? '开' : '关'],
+    ['hotspot', '个人热点', colors.green, <Sym key="h" name="iphone" size={18} />, t.hotspot ? '开' : '关']
   ] as const satisfies readonly (readonly [keyof Toggles, string, string, ReactNode, string])[]
   return (
     <div {...stylex.props(styles.card, styles.list)}>
@@ -460,7 +460,7 @@ export function ControlCenter({
           onClick={() => flip('focus')}
         >
           <Sym name="moon" size={22} />
-          <span {...stylex.props(styles.focusLabel)}>Focus</span>
+          <span {...stylex.props(styles.focusLabel)}>专注模式</span>
         </div>
       )
     },

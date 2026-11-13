@@ -82,7 +82,7 @@ export function PowerSheet({
   return (
     <div data-hud="poff" {...stylex.props(styles.poff)}>
       <div ref={track} {...stylex.props(styles.slide)}>
-        slide to power off
+        滑动来关机
         <div
           {...stylex.props(styles.knob, dragging && styles.knobDrag, styles.shiftX(x))}
           onPointerDown={(e) => {

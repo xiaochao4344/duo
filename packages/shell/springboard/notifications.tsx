@@ -133,7 +133,7 @@ export function NoticeList({ wide, onOpen }: { wide: boolean; onOpen: Open }) {
         <span {...stylex.props(styles.listTitle)}>Notification Center</span>
         <button
           type="button"
-          aria-label="Clear all"
+          aria-label="全部清除"
           {...stylex.props(shared.glass, styles.clear)}
           onClick={() => clearAllNotices()}
         >
