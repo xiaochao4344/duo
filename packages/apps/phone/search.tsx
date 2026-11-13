@@ -18,14 +18,14 @@ export function SearchBar({ q, onQuery }: { q: string; onQuery: (v: string) => v
         <Sym name="search" size={14} />
       </span>
       <TextField
-        placeholder="Search"
-        aria-label="Search"
+        placeholder="搜索"
+        aria-label="搜索"
         value={q}
         onChange={(e) => onQuery(e.target.value)}
         xstyle={[styles.searchIn]}
       />
       {!!q && (
-        <button type="button" aria-label="Clear search" {...stylex.props(styles.searchX)} onClick={() => onQuery('')}>
+        <button type="button" aria-label="清除搜索" {...stylex.props(styles.searchX)} onClick={() => onQuery('')}>
           <Sym name="close" size={13} />
         </button>
       )}

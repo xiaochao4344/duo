@@ -30,9 +30,9 @@ export function ContactsList({
   return (
     <>
       <Title>
-        Contacts
+        通讯录
         <Title as="span" variant="accessory">
-          <button type="button" aria-label="Add contact" {...stylex.props(styles.plain)} onClick={onNew}>
+          <button type="button" aria-label="新建联系人" {...stylex.props(styles.plain)} onClick={onNew}>
             <Sym name="plus" size={20} />
           </button>
         </Title>
@@ -54,7 +54,7 @@ export function ContactsList({
           </Section>
         </div>
       ))}
-      {!contacts.length && <div {...stylex.props(styles.empty)}>No Contacts</div>}
+      {!contacts.length && <div {...stylex.props(styles.empty)}>无联系人</div>}
     </>
   )
 }

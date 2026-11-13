@@ -46,19 +46,19 @@ export function Favorites({
   return (
     <>
       <Title>
-        Favorites
+        个人收藏
         <Title as="span" variant="accessory">
           {editing ? (
             <button type="button" {...stylex.props(styles.plain)} onClick={() => onEdit(false)}>
-              Done
+              完成
             </button>
           ) : (
             <>
-              <button type="button" aria-label="Add favorite" {...stylex.props(styles.plain)} onClick={onAdd}>
+              <button type="button" aria-label="添加个人收藏" {...stylex.props(styles.plain)} onClick={onAdd}>
                 <Sym name="plus" size={20} />
               </button>
               <button type="button" {...stylex.props(styles.plain)} onClick={() => onEdit(true)}>
-                Edit
+                编辑
               </button>
             </>
           )}
@@ -94,7 +94,7 @@ export function Favorites({
               <button
                 type="button"
                 {...stylex.props(styles.grip)}
-                aria-label="Drag to reorder"
+                aria-label="拖动排序"
                 onPointerDown={(e) => grip(e, c.id, i)}
                 onPointerMove={move}
                 onPointerUp={drop}
@@ -114,7 +114,7 @@ export function Favorites({
             )}
           </div>
         ))}
-        {!favorites.length && <div {...stylex.props(styles.empty)}>No Favorites</div>}
+        {!favorites.length && <div {...stylex.props(styles.empty)}>无个人收藏</div>}
       </Section>
     </>
   )

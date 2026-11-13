@@ -10,7 +10,7 @@ export const FAVORITES = 'favorites'
 
 /** How a list column names itself in its header and back button. */
 export const listTitle = (id: string, lists: ContactList[]) =>
-  id === ALL ? 'All Contacts' : id === FAVORITES ? 'Favorites' : (lists.find((l) => l.id === id)?.name ?? 'Contacts')
+  id === ALL ? '所有联系人' : id === FAVORITES ? '个人收藏' : (lists.find((l) => l.id === id)?.name ?? '通讯录')
 
 export const inList = (c: Contact, id: string) =>
   id === ALL ? true : id === FAVORITES ? c.favorite : c.lists.includes(id)
@@ -52,17 +52,17 @@ export const Lists = ({ contacts, lists, current, onPick, onAdd, onRemove, wide 
     <div {...stylex.props(styles.column)}>
       <div {...stylex.props(styles.hdr)}>
         <span {...stylex.props(styles.hdrSpace)}>
-          <button type="button" aria-label="Add list" {...stylex.props(styles.circle)} onClick={onAdd}>
+          <button type="button" aria-label="新建列表" {...stylex.props(styles.circle)} onClick={onAdd}>
             <Sym name="newFolder" size={17} />
           </button>
         </span>
       </div>
-      <div {...stylex.props(styles.hero, !wide && styles.heroSm)}>Lists</div>
+      <div {...stylex.props(styles.hero, !wide && styles.heroSm)}>列表</div>
       <div {...stylex.props(styles.scroll)}>
         <div {...stylex.props(styles.groupLabel)}>iCloud</div>
         <div {...stylex.props(styles.group)}>
-          {row(ALL, 'All Contacts', <Sym name="people" size={16} />)}
-          {row(FAVORITES, 'Favorites', <Sym name="starFill" size={15} />)}
+          {row(ALL, '所有联系人', <Sym name="people" size={16} />)}
+          {row(FAVORITES, '个人收藏', <Sym name="starFill" size={15} />)}
           {lists.map((l) => row(l.id, l.name, <Sym name="list" size={15} />, true))}
         </div>
         {lists.length === 0 && <div {...stylex.props(styles.empty)}>Tap the folder to add a list.</div>}
@@ -117,10 +117,10 @@ export const Directory = ({
       <div {...stylex.props(styles.hdr, !wide && styles.hdrInner)}>
         <button type="button" {...stylex.props(styles.hdrBack)} onClick={onBack}>
           <Sym name="back" size={20} />
-          Lists
+          列表
         </button>
         <span {...stylex.props(styles.hdrSpace)}>
-          <button type="button" aria-label="Add contact" {...stylex.props(styles.circle)} onClick={onAdd}>
+          <button type="button" aria-label="新建联系人" {...stylex.props(styles.circle)} onClick={onAdd}>
             <Sym name="plus" size={16} />
           </button>
         </span>
@@ -130,13 +130,13 @@ export const Directory = ({
         <Sym name="search" size={15} />
         <input
           {...stylex.props(styles.searchIn)}
-          placeholder="Search"
-          aria-label="Search contacts"
+          placeholder="搜索"
+          aria-label="搜索联系人"
           value={query}
           onChange={(e) => onQuery(e.target.value)}
         />
         {query && (
-          <button type="button" aria-label="Clear search" {...stylex.props(styles.clear)} onClick={() => onQuery('')}>
+          <button type="button" aria-label="清除搜索" {...stylex.props(styles.clear)} onClick={() => onQuery('')}>
             <Sym name="close" size={12} />
           </button>
         )}
@@ -144,7 +144,7 @@ export const Directory = ({
       <div ref={scroller} {...stylex.props(styles.scroll, styles.withRail)}>
         {me && !needle && (
           <div {...stylex.props(styles.group)}>
-            <Person c={me} on={sel === me.id} onPick={onPick} sub="My Card" size={44} />
+            <Person c={me} on={sel === me.id} onPick={onPick} sub="我的名片" size={44} />
           </div>
         )}
         {sections.map(([letter, people]) => (
@@ -168,7 +168,7 @@ export const Directory = ({
         ))}
         {shown.length === 0 && (
           <div {...stylex.props(styles.empty, animations.fade)}>
-            {needle ? `No results for "${query.trim()}"` : 'No Contacts'}
+            {needle ? `没有与"${query.trim()}"相关的结果` : '无联系人'}
           </div>
         )}
       </div>

@@ -47,28 +47,26 @@ const person = (
 export const SEED: Book = {
   me: 'me',
   lists: [
-    { id: 'family', name: 'Family' },
-    { id: 'studio', name: 'Studio' }
+    { id: 'family', name: '家人' },
+    { id: 'studio', name: '工作' }
   ],
   contacts: [
-    person('me', 'Thành', 'Đoàn', '+84 90 555 0001', 'Doan Labs', { email: 'thanh@doan-labs.com' }),
-    person('jony', '王磊', '', '+86 138 0217 4451', 'Apple', { favorite: true, lists: ['studio'] }),
-    person('ada', 'Ada', 'Lovelace', '+86 150 2671 8890', '', { notes: 'Analytical Engine notes, appended.' }),
+    person('me', '小超', '', '+86 138 0000 2026', '', { email: 'xiaochao@icloud.com' }),
+    person('jony', '王磊', '', '+86 138 0217 4451', '', { favorite: true, lists: ['studio'] }),
+    person('ada', '林小雨', '', '+86 150 2671 8890', '', { notes: '渲染图的事跟她对接。' }),
     person('mum', '妈妈', '', '+86 139 1882 3304', '', { favorite: true, lists: ['family'] }),
-    person('kim', 'Kim', 'Minh', '+86 136 3639 5521', '', { favorite: true, lists: ['studio'] }),
-    person('blender', 'Blender', 'Foundation', '+86 95338', '快递驿站', {
-      email: 'foundation@blender.org'
-    }),
+    person('kim', '陈静', '', '+86 136 3639 5521', '', { favorite: true, lists: ['studio'] }),
+    person('blender', '', '', '+86 95338', '快递驿站', {}),
     person('alan', '刘建国', '', '+86 137 8890 2214'),
-    person('apple-park', 'Apple Park', 'Reception', '+86 21 5555 0166', 'Apple', { email: 'reception@apple.com' }),
-    person('grace', 'Grace', 'Hopper', '+86 135 2480 7719'),
-    person('hideo', 'Hideo', 'Kojima', '+86 188 0176 3342', 'Kojima Productions'),
-    person('katherine', 'Katherine', 'Johnson', '+86 133 9102 6687'),
-    person('thanh', 'Nguyễn', 'Thanh', '+86 159 0098 4413'),
-    person('radia', 'Radia', 'Perlman', '+86 152 2130 9058'),
-    person('susan', 'Susan', 'Kare', '+86 131 2267 1185', '', { lists: ['studio'] }),
-    person('tim', '丁总', '', '+86 138 1755 9026', 'Apple', { favorite: true }),
-    person('vera', 'Vera', 'Rubin', '+86 186 2190 7734')
+    person('apple-park', '', '', '+86 21 5555 0166', '小区物业', {}),
+    person('grace', '赵阿姨', '', '+86 135 2480 7719'),
+    person('hideo', '周子昂', '', '+86 188 0176 3342', ''),
+    person('katherine', '吴秀英', '', '+86 133 9102 6687'),
+    person('thanh', '徐天成', '', '+86 159 0098 4413'),
+    person('radia', '沈佳怡', '', '+86 152 2130 9058'),
+    person('susan', '高敏', '', '+86 131 2267 1185', '', { lists: ['studio'] }),
+    person('tim', '丁总', '', '+86 138 1755 9026', '', { favorite: true }),
+    person('vera', '郑文博', '', '+86 186 2190 7734')
   ]
 }
 
@@ -80,12 +78,20 @@ export const fullName = (c: Pick<Contact, 'first' | 'last' | 'company'>) =>
 export const sortKey = (c: Contact) => (c.last || c.first || c.company || '').normalize('NFD')
 
 /** The letter a name files under; anything outside A-Z goes to '#'. */
+/** Pinyin initials for the cast's surname characters: a Chinese book files
+ * names by pinyin, as iOS does, not under '#'. */
+const PINYIN_INITIAL: Record<string, string> = {
+  陈: 'C', 丁: 'D', 高: 'G', 刘: 'L', 林: 'L', 沈: 'S', 王: 'W', 吴: 'W',
+  徐: 'X', 郑: 'Z', 周: 'Z', 赵: 'Z', 妈: 'M', 小: 'X', 快: 'K', 物: 'W'
+}
+
 export function letterOf(c: Contact) {
-  const ch =
+  const raw =
     sortKey(c)
       .replace(/[\u0300-\u036f]/g, '')[0]
       ?.toUpperCase() ?? '#'
-  return /[A-Z]/.test(ch) ? ch : '#'
+  if (/[A-Z]/.test(raw)) return raw
+  return PINYIN_INITIAL[raw] ?? '#'
 }
 
 export const initials = (c: Pick<Contact, 'first' | 'last' | 'company'>) =>

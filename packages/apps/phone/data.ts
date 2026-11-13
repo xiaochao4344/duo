@@ -67,7 +67,7 @@ const person = (
 
 export const SEED: Book = {
   contacts: [
-    person('jony', '王磊', '', '+86 138 0217 4451', 'Apple', { favorite: true }),
+    person('jony', '王磊', '', '+86 138 0217 4451', '', { favorite: true }),
     person('ada', 'Ada', 'Lovelace', '+86 150 2671 8890'),
     person('mum', '妈妈', '', '+86 139 1882 3304', '', { favorite: true }),
     person('kim', 'Kim', 'Minh', '+86 136 3639 5521', '', { favorite: true }),
@@ -75,7 +75,7 @@ export const SEED: Book = {
       email: 'foundation@blender.org'
     }),
     person('alan', '刘建国', '', '+86 137 8890 2214'),
-    person('apple-park', 'Apple Park', 'Reception', '+86 21 5555 0166', 'Apple', {
+    person('apple-park', '小区物业', '', '+86 21 5555 0166', '', {
       email: 'reception@apple.com'
     }),
     person('grace', 'Grace', 'Hopper', '+86 135 2480 7719'),
@@ -84,7 +84,7 @@ export const SEED: Book = {
     person('thanh', 'Nguyễn', 'Thanh', '+86 159 0098 4413'),
     person('radia', 'Radia', 'Perlman', '+86 152 2130 9058'),
     person('susan', 'Susan', 'Kare', '+86 131 2267 1185'),
-    person('tim', '丁总', '', '+86 138 1755 9026', 'Apple', { favorite: true }),
+    person('tim', '丁总', '', '+86 138 1755 9026', '', { favorite: true }),
     person('vera', 'Vera', 'Rubin', '+86 186 2190 7734')
   ],
   favOrder: ['mum', 'jony', 'kim', 'tim']
@@ -110,7 +110,7 @@ export const SEED_RECENTS: Recent[] = [
     at: Date.now() - 2 * 3600000,
     secs: 754
   },
-  { id: 'r3', name: '+84 90 555 887', number: '+84 90 555 887', dir: 'in', missed: true, at: Date.now() - 4 * 3600000 },
+  { id: 'r3', name: '+86 137 7741 5529', number: '+86 137 7741 5529', dir: 'in', missed: true, at: Date.now() - 4 * 3600000 },
   {
     id: 'r4',
     name: '小区物业',
@@ -155,15 +155,15 @@ export const SEED_RECENTS: Recent[] = [
 const VM_TEXT: [string, string][] = [
   [
     '妈妈',
-    'Hi love, it is Mum. Your aunt arrives Thursday evening now, not Friday, so dinner moved too. Call me back when you land, okay? I left the keys under the blue pot by the door. Talk soon.'
+    '是我，妈妈。你姑姑改周四晚上到了，不是周五，饭也跟着改了。你落地了给我回个电话啊。钥匙我放在门口那个蓝花盆底下了。回头聊。'
   ],
   [
     '小区物业',
-    'Good afternoon, this is Apple Park reception. Your visitor badge for tomorrow is ready at the main lobby desk. Bring a photo ID, and ask for the studio tour check in. We will see you at nine.'
+    '您好，这里是小区物业。您明天的访客证已经办好了，放在大堂前台。来的时候带上身份证，到前台登记一下就行。明天九点见。'
   ],
   [
     '陈静',
-    'Anh ơi, em gọi nhé. Tối nay quán cà phê đóng sớm nên mình đổi sang chỗ bên cạnh hồ, tám giờ nhé. Nhớ mang theo cái laptop, em cần coi lại file design. Gọi lại cho em khi nào rảnh.'
+    '喂，是我。今晚那家咖啡馆关门早，咱们换到湖边那家，还是八点。记得带上电脑，我要再看一遍那个文件。你空了给我回个电话。'
   ]
 ]
 
@@ -267,13 +267,13 @@ const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString()
 /** The row stamp: today reads as a time, this week as a day, else the date. */
 export function when(at: number, now = new Date()) {
   const d = new Date(at)
-  if (sameDay(d, now)) return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }).replace(/\s?[AP]M/i, '')
+  if (sameDay(d, now)) return d.toLocaleTimeString('zh-CN', { hour: 'numeric', minute: '2-digit', hour12: false })
   const week = new Date(now)
   week.setDate(now.getDate() - 6)
-  if (d > week) return d.toLocaleDateString([], { weekday: 'long' })
-  return d.toLocaleDateString([], { month: 'short', day: 'numeric' })
+  if (d > week) return d.toLocaleDateString('zh-CN', { weekday: 'long' })
+  return d.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' })
 }
 
 /** The detail stamp: "Tuesday, September 23, 2:41 PM". */
 export const stamp = (at: number) =>
-  `${new Date(at).toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })} at ${new Date(at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`
+  `${new Date(at).toLocaleDateString('zh-CN', { weekday: 'long', month: 'long', day: 'numeric' })} ${new Date(at).toLocaleTimeString('zh-CN', { hour: 'numeric', minute: '2-digit', hour12: false })}`

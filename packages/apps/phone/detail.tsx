@@ -111,11 +111,11 @@ export function ContactDetail({
       <div {...stylex.props(styles.hdr, styles.hdrInner)}>
         <button type="button" {...stylex.props(styles.hdrBack)} onClick={onBack}>
           <Sym name="back" size={20} />
-          Contacts
+          通讯录
         </button>
         <span {...stylex.props(styles.hdrSpace)}>
           <button type="button" {...stylex.props(styles.plain)} onClick={onEdit}>
-            Edit
+            编辑
           </button>
         </span>
       </div>
@@ -128,15 +128,15 @@ export function ContactDetail({
           {(c.first || c.last) && c.company && <div {...stylex.props(styles.company)}>{c.company}</div>}
         </div>
         <div {...stylex.props(styles.acts)}>
-          <Act label="message" glyph="bubble" onClick={() => os.open('Messages', name)} />
+          <Act label="信息" glyph="bubble" onClick={() => os.open('Messages', name)} />
           <Act
-            label="call"
+            label="电话"
             glyph="call"
             disabled={!c.phone}
             onClick={() => place({ number: c.phone, contactId: c.id })}
           />
-          <Act label="video" glyph="video" onClick={() => os.open('FaceTime', name)} />
-          <Act label="mail" glyph="envelope" disabled={!c.email} onClick={() => os.open('Mail')} />
+          <Act label="视频" glyph="video" onClick={() => os.open('FaceTime', name)} />
+          <Act label="邮件" glyph="envelope" disabled={!c.email} onClick={() => os.open('Mail')} />
         </div>
         {(c.phone || c.email) && (
           <div {...stylex.props(styles.group)}>
@@ -157,16 +157,16 @@ export function ContactDetail({
         {!!c.notes && (
           <div {...stylex.props(styles.group)}>
             <div {...stylex.props(styles.field)}>
-              <span {...stylex.props(styles.fieldLabel)}>Notes</span>
+              <span {...stylex.props(styles.fieldLabel)}>备注</span>
               <span {...stylex.props(styles.fieldValue, styles.fieldNote)}>{c.notes}</span>
             </div>
           </div>
         )}
         <div {...stylex.props(styles.group)}>
-          <Action label="Send Message" onClick={() => os.open('Messages', name)} />
-          <Action label="Share Contact" onClick={share} />
+          <Action label="发送信息" onClick={() => os.open('Messages', name)} />
+          <Action label="共享联系人" onClick={share} />
           <Action
-            label={c.favorite ? 'Remove from Favorites' : 'Add to Favorites'}
+            label={c.favorite ? '从个人收藏移除' : '添加到个人收藏'}
             onClick={onToggleFavorite}
             trail={
               <span key={String(c.favorite)} {...stylex.props(styles.bounce, c.favorite && styles.gold)}>
@@ -177,7 +177,7 @@ export function ContactDetail({
         </div>
         <div {...stylex.props(styles.group)}>
           <Action label={c.blocked ? 'Unblock this Caller' : 'Block this Caller'} danger onClick={onToggleBlocked} />
-          <Action label="Delete Contact" danger onClick={onDelete} />
+          <Action label="删除联系人" danger onClick={onDelete} />
         </div>
       </div>
       <Toast toast={toast} closing={closing} />
@@ -213,7 +213,7 @@ export function CallDetail({
       <div {...stylex.props(styles.hdr, styles.hdrInner)}>
         <button type="button" {...stylex.props(styles.hdrBack)} onClick={onBack}>
           <Sym name="back" size={20} />
-          Recents
+          最近通话
         </button>
       </div>
       <div {...stylex.props(styles.card)}>
@@ -225,10 +225,10 @@ export function CallDetail({
           {!!contact?.company && <div {...stylex.props(styles.company)}>{contact.company}</div>}
         </div>
         <div {...stylex.props(styles.acts)}>
-          <Act label="message" glyph="bubble" onClick={() => os.open('Messages', name)} />
-          <Act label="call" glyph="call" onClick={() => place({ number: r.number, contactId: r.contactId })} />
-          <Act label="video" glyph="video" onClick={() => os.open('FaceTime', name)} />
-          <Act label="mail" glyph="envelope" disabled={!contact?.email} onClick={() => os.open('Mail')} />
+          <Act label="信息" glyph="bubble" onClick={() => os.open('Messages', name)} />
+          <Act label="电话" glyph="call" onClick={() => place({ number: r.number, contactId: r.contactId })} />
+          <Act label="视频" glyph="video" onClick={() => os.open('FaceTime', name)} />
+          <Act label="邮件" glyph="envelope" disabled={!contact?.email} onClick={() => os.open('Mail')} />
         </div>
         <div {...stylex.props(styles.group)}>
           <div {...stylex.props(styles.field)}>
@@ -238,7 +238,7 @@ export function CallDetail({
           <div {...stylex.props(styles.field)}>
             <span {...stylex.props(styles.fieldLabel)}>call type</span>
             <span {...stylex.props(styles.fieldValue)}>
-              {r.missed ? 'Missed Call' : r.dir === 'out' ? 'Outgoing Call' : 'Incoming Call'}
+              {r.missed ? '未接来电' : r.dir === 'out' ? '去电' : '来电'}
             </span>
           </div>
           <div {...stylex.props(styles.field)}>
@@ -254,8 +254,8 @@ export function CallDetail({
         </div>
         {!contact && (
           <div {...stylex.props(styles.group)}>
-            <Action label="Create New Contact" onClick={onNewContact} />
-            <Action label="Add to Existing Contact" onClick={onAddToContact} />
+            <Action label="新建联系人" onClick={onNewContact} />
+            <Action label="添加到现有联系人" onClick={onAddToContact} />
           </div>
         )}
         <div {...stylex.props(styles.group)}>
@@ -264,7 +264,7 @@ export function CallDetail({
             danger
             onClick={onToggleBlocked}
           />
-          <Action label="Remove from Recents" danger onClick={onDelete} />
+          <Action label="从最近通话中移除" danger onClick={onDelete} />
         </div>
       </div>
     </div>
@@ -302,11 +302,11 @@ export function ContactForm({ draft, isNew, onSave, onClose }: FormProps) {
         <div {...stylex.props(styles.form)}>
           <div {...stylex.props(styles.formHdr)}>
             <button type="button" {...stylex.props(styles.plain)} onClick={onClose}>
-              Cancel
+              取消
             </button>
-            {isNew ? 'New Contact' : 'Edit Contact'}
+            {isNew ? '新建联系人' : '编辑联系人'}
             <button type="button" {...stylex.props(styles.plain, styles.formDone)} onClick={submit} disabled={!valid}>
-              Done
+              完成
             </button>
           </div>
           <div {...stylex.props(styles.formBody)}>
@@ -347,8 +347,8 @@ export function ContactForm({ draft, isNew, onSave, onClose }: FormProps) {
               <div {...stylex.props(styles.formRow)}>
                 <TextField
                   multiline
-                  placeholder="Notes"
-                  aria-label="Notes"
+                  placeholder="备注"
+                  aria-label="备注"
                   value={c.notes}
                   onChange={(e) => put({ notes: e.target.value })}
                   xstyle={[styles.formIn, styles.formArea]}

@@ -123,7 +123,7 @@ export function Keypad({ book }: { book: Book }) {
           {!!n && (
             <button
               type="button"
-              aria-label="Delete"
+              aria-label="删除"
               {...stylex.props(styles.back)}
               onPointerDown={backDown}
               onPointerUp={backUp}
@@ -133,7 +133,7 @@ export function Keypad({ book }: { book: Book }) {
             </button>
           )}
         </span>
-        <button type="button" aria-label="Call" {...stylex.props(styles.grn, styles.dialBtn)} onClick={call}>
+        <button type="button" aria-label="拨打" {...stylex.props(styles.grn, styles.dialBtn)} onClick={call}>
           <Sym name="call" size={30} />
         </button>
         <span {...stylex.props(styles.dialSide)} />

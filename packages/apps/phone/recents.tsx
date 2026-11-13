@@ -23,8 +23,8 @@ export function Recents({
   onInfo
 }: {
   recents: Recent[]
-  filter: 'All' | 'Missed'
-  onFilter: (f: 'All' | 'Missed') => void
+  filter: '全部' | '未接来电'
+  onFilter: (f: '全部' | '未接来电') => void
   editing: boolean
   onEdit: (on: boolean) => void
   onClear: () => void
@@ -33,7 +33,7 @@ export function Recents({
 }) {
   // The minus arms a Delete: two taps, the same result as a full swipe.
   const [armed, setArmed] = useState('')
-  const shown = recents.filter((r) => filter === 'All' || r.missed)
+  const shown = recents.filter((r) => filter === '全部' || r.missed)
   const del = (id: string) => {
     onDelete(id)
     setArmed('')
@@ -41,23 +41,23 @@ export function Recents({
   return (
     <>
       <Title>
-        Recents
+        最近通话
         <Title as="span" variant="accessory" xstyle={[styles.hdrActs]}>
-          <Segmented options={['All', 'Missed'] as const} value={filter} onChange={onFilter} />
+          <Segmented options={['全部', '未接来电'] as const} value={filter} onChange={onFilter} />
           {editing ? (
             <button type="button" {...stylex.props(styles.plain)} onClick={() => onEdit(false)}>
-              Done
+              完成
             </button>
           ) : (
             <button type="button" {...stylex.props(styles.plain)} onClick={() => onEdit(true)}>
-              Edit
+              编辑
             </button>
           )}
         </Title>
       </Title>
       {editing && !!shown.length && (
         <button type="button" {...stylex.props(styles.clearAll)} onClick={onClear}>
-          Clear All Recents
+          清除所有通话记录
         </button>
       )}
       <Section xstyle={[styles.list]}>
@@ -89,12 +89,12 @@ export function Recents({
                 <span {...stylex.props(styles.recDir)}>
                   {r.dir === 'out' ? <Glyph name="callOut" size={11} /> : <Glyph name="callIn" size={11} />}
                 </span>
-                mobile · {when(r.at)}
+                手机 · {when(r.at)}
               </Text>
             </button>
             {armed === r.id && editing ? (
               <button type="button" {...stylex.props(styles.deleteBtn)} onClick={() => del(r.id)}>
-                Delete
+                删除
               </button>
             ) : (
               <button
@@ -108,7 +108,7 @@ export function Recents({
             )}
           </div>
         ))}
-        {!shown.length && <div {...stylex.props(styles.empty)}>No {filter === 'Missed' ? 'Missed ' : ''}Calls</div>}
+        {!shown.length && <div {...stylex.props(styles.empty)}>{filter === '未接来电' ? '无未接来电' : '无通话记录'}</div>}
       </Section>
     </>
   )

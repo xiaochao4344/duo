@@ -21,11 +21,11 @@ import { styles } from './styles.ts'
 import { Voicemails } from './voicemail.tsx'
 
 const TABS = [
-  ['Favorites', 'starFill'],
-  ['Recents', 'clockFill'],
-  ['Contacts', 'personFill'],
-  ['Keypad', 'keypad'],
-  ['Voicemail', 'voicemail']
+  ['个人收藏', 'starFill'],
+  ['最近通话', 'clockFill'],
+  ['通讯录', 'personFill'],
+  ['拨号键盘', 'keypad'],
+  ['语音留言', 'voicemail']
 ] as const
 
 type Draft = { c: Contact; isNew: boolean; linkRecent?: string }
@@ -54,7 +54,7 @@ export const Phone = ({ os }: { os: Os }) => {
   const [tab, setTab] = useShared('tab', 3)
   const [favEdit, setFavEdit] = useShared('favEdit', false)
   const [recEdit, setRecEdit] = useShared('recEdit', false)
-  const [filter, setFilter] = useShared<'All' | 'Missed'>('recFilter', 'All')
+  const [filter, setFilter] = useShared<'全部' | '未接来电'>('recFilter', '全部')
   // What each list has pushed: Favorites and Contacts hold a contact id,
   // Recents a recent id, Voicemail the expanded message.
   const [view0, setView0] = useShared('view0', '')
@@ -288,7 +288,7 @@ export const Phone = ({ os }: { os: Os }) => {
           )}
         </Screen>
       </div>
-      <nav aria-label="Phone" {...stylex.props(styles.bar)}>
+      <nav aria-label="电话" {...stylex.props(styles.bar)}>
         {TABS.map(([label, glyph], i) => (
           <button
             key={label}
@@ -302,7 +302,7 @@ export const Phone = ({ os }: { os: Os }) => {
           >
             <span {...stylex.props(styles.tabGlyph)}>
               <Sym name={glyph} size={24} />
-              {label === 'Voicemail' && !!unheard && <span {...stylex.props(styles.badge)}>{unheard}</span>}
+              {label === '语音留言' && !!unheard && <span {...stylex.props(styles.badge)}>{unheard}</span>}
             </span>
             {label}
           </button>
@@ -324,7 +324,7 @@ export const Phone = ({ os }: { os: Os }) => {
       {!!pick && (
         <Picker
           book={book}
-          title={pick === 'add' ? 'Add Call' : pick === 'fav' ? 'Add Favorite' : 'Add to Existing Contact'}
+          title={pick === 'add' ? '添加通话' : pick === 'fav' ? '添加个人收藏' : '添加到现有联系人'}
           onPick={pickContact}
           onClose={() => setPick('')}
         />

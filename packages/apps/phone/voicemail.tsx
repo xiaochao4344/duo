@@ -29,7 +29,7 @@ export function Voicemails({
 }) {
   return (
     <>
-      <Title>Voicemail</Title>
+      <Title>语音留言</Title>
       <Section xstyle={[styles.list]}>
         {voicemails.map((v) => (
           <div key={v.id} {...stylex.props(styles.vmRow)}>
@@ -48,7 +48,7 @@ export function Voicemails({
             )}
           </div>
         ))}
-        {!voicemails.length && <div {...stylex.props(styles.empty)}>No Voicemail</div>}
+        {!voicemails.length && <div {...stylex.props(styles.empty)}>无语音留言</div>}
       </Section>
     </>
   )
@@ -80,7 +80,7 @@ function Player({
         </button>
         <input
           type="range"
-          aria-label="Playback position"
+          aria-label="播放进度"
           min={0}
           max={v.secs}
           step={0.1}
@@ -90,7 +90,7 @@ function Player({
         />
         <button
           type="button"
-          aria-label="Speaker"
+          aria-label="免提"
           aria-pressed={speaker}
           {...stylex.props(styles.vmCtl, speaker && styles.vmCtlOn)}
           onClick={() => setSpeaker((s) => !s)}
@@ -109,13 +109,13 @@ function Player({
           {...stylex.props(styles.vmAct)}
           onClick={() => place({ number: v.number, contactId: v.contactId })}
         >
-          Call Back
+          回拨
         </button>
         <button type="button" {...stylex.props(styles.vmAct)} onClick={() => onShare(v)}>
-          Share
+          共享
         </button>
         <button type="button" {...stylex.props(styles.vmAct, styles.danger)} onClick={() => onDelete(v.id)}>
-          Delete
+          删除
         </button>
       </div>
     </div>

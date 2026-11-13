@@ -7,9 +7,9 @@ import { styles } from './styles.ts'
 
 type Field = { key: 'first' | 'last' | 'company' | 'phone' | 'email' | 'notes'; label: string; type?: string }
 const FIELDS: Field[] = [
-  { key: 'first', label: 'First' },
-  { key: 'last', label: 'Last' },
-  { key: 'company', label: 'Company' }
+  { key: 'first', label: '名' },
+  { key: 'last', label: '姓' },
+  { key: 'company', label: '公司' }
 ]
 const REACH: Field[] = [
   { key: 'phone', label: 'mobile', type: 'tel' },
@@ -38,16 +38,16 @@ export function ContactForm({ draft, isNew, onSave, onClose }: FormProps) {
         <div {...stylex.props(styles.form)}>
           <div {...stylex.props(styles.formHdr)}>
             <button type="button" {...stylex.props(styles.plain, styles.formBtn)} onClick={onClose}>
-              Cancel
+              取消
             </button>
-            {isNew ? 'New Contact' : 'Edit Contact'}
+            {isNew ? '新建联系人' : '编辑联系人'}
             <button
               type="button"
               {...stylex.props(styles.plain, styles.formBtn, styles.formDone)}
               onClick={submit}
               disabled={!valid}
             >
-              Done
+              完成
             </button>
           </div>
           <div {...stylex.props(styles.formBody)}>
@@ -75,7 +75,7 @@ export function ContactForm({ draft, isNew, onSave, onClose }: FormProps) {
                   <span {...stylex.props(styles.formLabel)}>{f.label}</span>
                   <TextField
                     type={f.type}
-                    placeholder={f.key === 'phone' ? 'Phone' : 'Email'}
+                    placeholder={f.key === 'phone' ? '电话' : '电子邮件'}
                     value={c[f.key]}
                     onChange={(e) => put({ [f.key]: e.target.value })}
                     onKeyDown={(e) => e.key === 'Enter' && submit()}
@@ -88,8 +88,8 @@ export function ContactForm({ draft, isNew, onSave, onClose }: FormProps) {
               <div {...stylex.props(styles.formRow)}>
                 <TextField
                   multiline
-                  placeholder="Notes"
-                  aria-label="Notes"
+                  placeholder="备注"
+                  aria-label="备注"
                   value={c.notes}
                   onChange={(e) => put({ notes: e.target.value })}
                   xstyle={[styles.formIn, styles.formArea]}
@@ -127,9 +127,9 @@ export function ListPicker({ contact: c, lists, onChange, onAdd, onClose }: List
         <div {...stylex.props(styles.form)}>
           <div {...stylex.props(styles.formHdr)}>
             <span />
-            Add to Lists
+            添加到列表
             <button type="button" {...stylex.props(styles.plain, styles.formBtn, styles.formDone)} onClick={onClose}>
-              Done
+              完成
             </button>
           </div>
           <div {...stylex.props(styles.formBody)}>
@@ -159,8 +159,8 @@ export function ListPicker({ contact: c, lists, onChange, onAdd, onClose }: List
                   <Sym name="plus" size={15} />
                 </span>
                 <TextField
-                  placeholder="New List"
-                  aria-label="New list name"
+                  placeholder="新列表"
+                  aria-label="新列表名称"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && add()}
@@ -191,24 +191,24 @@ export function NewList({ open, onAdd, onClose }: NameProps) {
       <div {...stylex.props(styles.form)}>
         <div {...stylex.props(styles.formHdr)}>
           <button type="button" {...stylex.props(styles.plain, styles.formBtn)} onClick={onClose}>
-            Cancel
+            取消
           </button>
-          New List
+          新建列表
           <button
             type="button"
             {...stylex.props(styles.plain, styles.formBtn, styles.formDone)}
             onClick={submit}
             disabled={!name.trim()}
           >
-            Done
+            完成
           </button>
         </div>
         <div {...stylex.props(styles.formBody)}>
           <div {...stylex.props(styles.formGroup)}>
             <div {...stylex.props(styles.formRow)}>
               <TextField
-                placeholder="List Name"
-                aria-label="List name"
+                placeholder="列表名称"
+                aria-label="列表名称"
                 value={name}
                 autoFocus
                 onChange={(e) => setName(e.target.value)}

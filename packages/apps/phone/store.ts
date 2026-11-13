@@ -210,7 +210,7 @@ export function swapCalls(id: number) {
 
 // ---------- incoming ----------
 
-const VM_FALLBACK = 'Hi, it is me. Call me back when you get this, okay?'
+const VM_FALLBACK = '喂，是我。看到留言给我回个电话。'
 
 /** The phone rings. `*#0#` on the keypad dials this directly. */
 export function ring(raw?: { name?: string; number?: string }) {

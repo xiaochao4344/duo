@@ -64,26 +64,26 @@ export function CallScreen({
       ) : (
         <div {...stylex.props(styles.grid)}>
           <Ctl
-            label="mute"
+            label="静音"
             on={call.muted}
             sym={<Glyph name={call.muted ? 'micOff' : 'mic'} />}
             onClick={() => toggleCall(call.id, 'muted')}
           />
-          <Ctl label="keypad" sym={<Sym name="keypad" size={24} />} onClick={() => toggleCall(call.id, 'keypad')} />
+          <Ctl label="拨号键盘" sym={<Sym name="keypad" size={24} />} onClick={() => toggleCall(call.id, 'keypad')} />
           <Ctl
-            label="speaker"
+            label="免提"
             on={call.speaker}
             sym={<Glyph name="speaker" />}
             onClick={() => toggleCall(call.id, 'speaker')}
           />
-          <Ctl label="add call" sym={<Sym name="plus" size={24} />} onClick={onAdd} />
+          <Ctl label="添加通话" sym={<Sym name="plus" size={24} />} onClick={onAdd} />
           <Ctl label="FaceTime" sym={<Sym name="video" size={24} />} onClick={() => onHide('facetime')} />
-          <Ctl label="contacts" sym={<Sym name="person" size={24} />} onClick={() => onHide('contacts')} />
+          <Ctl label="通讯录" sym={<Sym name="person" size={24} />} onClick={() => onHide('contacts')} />
         </div>
       )}
       <button
         type="button"
-        aria-label="End call"
+        aria-label="结束通话"
         {...stylex.props(styles.grn, styles.red, styles.hangUp)}
         onClick={() => end(call.id)}
       >
@@ -114,7 +114,7 @@ const Dtmf = ({ call }: { call: LiveCall }) => {
       <div {...stylex.props(styles.dtmfNum)}>{n || ' '}</div>
       <Pad small onKey={(k) => setN((s) => (s + k).slice(0, 24))} />
       <button type="button" {...stylex.props(styles.hidePad)} onClick={() => toggleCall(call.id, 'keypad')}>
-        Hide
+        隐藏
       </button>
     </div>
   )
@@ -138,7 +138,7 @@ export function IncomingScreen({ inc }: { inc: Incoming }) {
       <div {...stylex.props(styles.ringRow)}>
         <button type="button" {...stylex.props(styles.ringOpt)} onClick={() => screenCall(!inc.screening)}>
           <Sym name="privacy" size={20} />
-          {inc.screening ? 'Screening on' : 'Screen Call'}
+          {inc.screening ? '已开启筛选' : '筛选通话'}
         </button>
       </div>
       <div {...stylex.props(styles.ringCtl)}>
@@ -146,13 +146,13 @@ export function IncomingScreen({ inc }: { inc: Incoming }) {
           <span {...stylex.props(styles.ringDisc, styles.redDisc)}>
             <Sym name="close" size={26} />
           </span>
-          Decline
+          拒绝
         </button>
         <button type="button" {...stylex.props(styles.ringBtn)} onClick={answer}>
           <span {...stylex.props(styles.ringDisc, styles.grnDisc)}>
             <Sym name="call" size={26} />
           </span>
-          Accept
+          接听
         </button>
       </div>
     </div>
@@ -189,7 +189,7 @@ export function Picker({
       <div {...stylex.props(styles.pickHd)}>
         <span {...stylex.props(styles.pickTitle)}>{title}</span>
         <button type="button" {...stylex.props(shared.pill)} onClick={onClose}>
-          Done
+          完成
         </button>
       </div>
       <div {...stylex.props(styles.pickBody)}>

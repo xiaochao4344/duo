@@ -55,12 +55,12 @@ export const Detail = ({ contact: c, lists, isMe, wide, onBack, onEdit, onToggle
         {!wide && (
           <button type="button" {...stylex.props(styles.hdrBack)} onClick={onBack}>
             <Sym name="back" size={20} />
-            Contacts
+            通讯录
           </button>
         )}
         <span {...stylex.props(styles.hdrSpace)}>
           <button type="button" {...stylex.props(styles.plain, styles.formBtn)} onClick={onEdit}>
-            Edit
+            编辑
           </button>
         </span>
       </div>
@@ -74,10 +74,10 @@ export const Detail = ({ contact: c, lists, isMe, wide, onBack, onEdit, onToggle
           {isMe && <div {...stylex.props(styles.company)}>My Card</div>}
         </div>
         <div {...stylex.props(styles.acts)}>
-          <Act label="message" onClick={() => open('Messages')} glyph={<Glyph d={BUBBLE} />} />
-          <Act label="call" onClick={() => open('Phone')} sym="call" disabled={!c.phone} />
-          <Act label="video" onClick={() => open('FaceTime', name)} sym="video" />
-          <Act label="mail" onClick={() => open('Mail')} glyph={<Glyph d={ENVELOPE} />} disabled={!c.email} />
+          <Act label="信息" onClick={() => open('Messages')} glyph={<Glyph d={BUBBLE} />} />
+          <Act label="电话" onClick={() => open('Phone')} sym="call" disabled={!c.phone} />
+          <Act label="视频" onClick={() => open('FaceTime', name)} sym="video" />
+          <Act label="邮件" onClick={() => open('Mail')} glyph={<Glyph d={ENVELOPE} />} disabled={!c.email} />
         </div>
         {(c.phone || c.email) && (
           <div {...stylex.props(styles.group)}>
@@ -98,14 +98,14 @@ export const Detail = ({ contact: c, lists, isMe, wide, onBack, onEdit, onToggle
         {c.notes && (
           <div {...stylex.props(styles.group)}>
             <div {...stylex.props(styles.field)}>
-              <span {...stylex.props(styles.fieldLabel)}>Notes</span>
+              <span {...stylex.props(styles.fieldLabel)}>备注</span>
               <span {...stylex.props(styles.fieldValue, styles.fieldNote)}>{c.notes}</span>
             </div>
           </div>
         )}
         <div {...stylex.props(styles.group)}>
-          <Action label="Send Message" onClick={() => open('Messages')} />
-          <Action label="Share Contact" onClick={share} />
+          <Action label="发送信息" onClick={() => open('Messages')} />
+          <Action label="共享联系人" onClick={share} />
           {!isMe && (
             <Action
               label={c.favorite ? 'Remove from Favorites' : 'Add to Favorites'}
@@ -117,7 +117,7 @@ export const Detail = ({ contact: c, lists, isMe, wide, onBack, onEdit, onToggle
               }
             />
           )}
-          <Action label="Add to Lists" onClick={onLists} detail={mine.length ? mine.join(', ') : undefined} />
+          <Action label="添加到列表" onClick={onLists} detail={mine.length ? mine.join(', ') : undefined} />
         </div>
         {!isMe && (
           <div {...stylex.props(styles.group)}>
@@ -126,7 +126,7 @@ export const Detail = ({ contact: c, lists, isMe, wide, onBack, onEdit, onToggle
               danger
               onClick={() => onToggle('blocked')}
             />
-            <Action label="Delete Contact" danger onClick={onDelete} />
+            <Action label="删除联系人" danger onClick={onDelete} />
           </div>
         )}
       </div>
@@ -162,7 +162,7 @@ export const Blank = () => (
     <span {...stylex.props(styles.blankGlyph)}>
       <Sym name="personFill" size={56} />
     </span>
-    No Contact Selected
+    未选择联系人
     <span {...stylex.props(styles.blankSub)}>Choose a contact from the list.</span>
   </div>
 )
