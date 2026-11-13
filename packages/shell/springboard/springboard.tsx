@@ -11,6 +11,7 @@
 // because a scrubbed animation has no declarative equivalent.
 
 // An app wears the kit's light or dark theme, inherited by every nav page inside.
+import { type KbField, Keyboard } from '@doan-labs/duo-uikit/keyboard.tsx'
 import { dark, light } from '@doan-labs/duo-uikit/styles.ts'
 import {
   app,
@@ -65,6 +66,19 @@ export function SpringBoard({ w, hgt, boot, arg, shots }: SpringBoardProps) {
 
   const [drop, setDrop] = useState<Drop>(null)
   const [switcher, setSwitcher] = useState(false)
+  // The system keyboard: whichever text field last took focus owns it. It
+  // stays up until the person dismisses it, the field unmounts with its
+  // app, or focus moves to another field - a plain blur (tapping Send)
+  // does not drop it, matching how iOS keeps the board over a chat.
+  const [kbField, setKbField] = useState<KbField | null>(null)
+  const textFieldOf = (t: EventTarget | null): KbField | null => {
+    if (t instanceof HTMLTextAreaElement) return t
+    if (t instanceof HTMLInputElement && ['', 'text', 'search', 'tel', 'url', 'email', 'number'].includes(t.type)) return t
+    return null
+  }
+  useEffect(() => {
+    if (kbField && !kbField.isConnected) setKbField(null)
+  })
   const [land, setLand] = useState(0)
   const [locked, setLocked] = useState(lockState.locked)
   const hasLock = useRef(lockState.locked)
@@ -286,6 +300,14 @@ export function SpringBoard({ w, hgt, boot, arg, shots }: SpringBoardProps) {
     <>
       <div
         ref={disp}
+        onFocus={(e) => {
+          const f = textFieldOf(e.target)
+          if (f) setKbField(f)
+        }}
+        onPointerDownCapture={(e) => {
+          const f = textFieldOf(e.target)
+          if (f && f !== kbField) setKbField(f)
+        }}
         {...stylex.props(
           styles.disp,
           styles.wall(wall),
@@ -398,6 +420,7 @@ export function SpringBoard({ w, hgt, boot, arg, shots }: SpringBoardProps) {
                 e.side === 'right' && styles.appRight(split * 100),
                 (drop?.id === e.id || switcher) && styles.appDrag,
                 e.parked && !switcher && styles.appParked,
+                kbField && !switcher && styles.appKb,
                 e.a.light && !t.darkMode ? light : dark
               )}
             >
@@ -406,6 +429,10 @@ export function SpringBoard({ w, hgt, boot, arg, shots }: SpringBoardProps) {
             </div>
           )
         })}
+
+        {kbField && !switcher && !cc && (
+          <Keyboard field={kbField} onClose={() => setKbField(null)} />
+        )}
 
         {/* Over apps, lock and Spotlight, under the system HUDs: iOS's order. */}
         <NoticeBanner onOpen={openNotice} />
@@ -496,6 +523,10 @@ const styles = stylex.create({
   appRight: (pct: number) => ({ left: `${pct}%` }),
   // Off the glass but running, for the switcher to bring back.
   appParked: { display: 'none' },
+  // With the keyboard up the app gives up the board's height, the way iOS
+  // resizes the app instead of covering its bottom bar. The literal is
+  // KB_HEIGHT in uikit/keyboard.tsx; StyleX only takes literals here.
+  appKb: { paddingBottom: 278 },
   // The grab strip over the seam between two apps; the pill on it is the handle you see.
   divider: {
     position: 'absolute',
